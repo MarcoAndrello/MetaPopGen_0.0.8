@@ -37,11 +37,15 @@ sim.metapopgen.dioecious.multilocus <- function(input.type,demographic.data,N1_M
     # Define basic variables
     
     m <- dim(N1_M)[1]                 # Number of genotypes
-    l <- length(Proba[,1])            # Number of alleles   ### What is l in the multilocus version? Number of GAMETES? 07/09/18
+    l <- prod(List_gene)              # Number of alleles
     n <- dim(N1_M)[2]                 # Number of demes
     z <- dim(N1_M)[3]                 # Number of age-classes
     
-	# Here there should be the warning about one age-class and recr.dd=adults 															 
+    # If only one age-class and recr.dd=="adults", gives an error
+    if (z == 1 & recr.dd == "adults") {
+      stop("Detected only one age class (z=1) and recruitment probability dependent on adult density (recr.dd == 'adults'). This combination is not supported. Use recr.dd == 'settlers' instead.")
+    }
+    
     # Define usefull matrix: 
     index<-genotype.index.multilocus(List_gene)
     
@@ -130,7 +134,7 @@ sim.metapopgen.dioecious.multilocus <- function(input.type,demographic.data,N1_M
         
         Gamete<-array(0,dim=c(l,m))
         for (k in 1:m){
-         err<- try (as.vector(rmultinom(1,fec[k],Proba[,k])),silent=T) #meiose
+         err<- try (as.vector(rmultinom(1,fec,Proba[,k])),silent=T) #meiose
          if (class(err)=="try-error") {
             prob.mvr <- fec[k] * Proba[,k]				# Vector of means of the multivariate normal distribution
             var.mvr <- fec[k]* Proba[,k] * (1-Proba[,k])	# Vector of variances of the multivariate normal distribution
@@ -435,18 +439,9 @@ sim.metapopgen.dioecious.multilocus <- function(input.type,demographic.data,N1_M
                         Nprime_M[k,i,x] = surv(sigma_M[k,i,x,t],N_M[k,i,x,t])
                         Nprime_F[k,i,x] = surv(sigma_F[k,i,x,t],N_F[k,i,x,t])
                     }
-                  if(is.na(Nprime_M[k,i,x])){
-                    Nprime_M[k,i,x]<-0
-					cat("NA adjustment in deme",i,"age",x,"genotype",k,"males \n")
-                  }
-                  if(is.na(Nprime_F[k,i,x])){
-                    Nprime_F[k,i,x]<-0
-					cat("NA adjustment in deme",i,"age",x,"genotype",k,"females \n")
-                  }
                 }
             }
         }  
-      
         
         if (verbose) print("Apply reproduction function")
         
@@ -457,7 +452,7 @@ sim.metapopgen.dioecious.multilocus <- function(input.type,demographic.data,N1_M
         
         for (i in 1 : n) {
             if (save.res) {
-                if (sum(Nprime_M[,i,],Nprime_F[,i,])==0) { # To save computing time. In the older version it was: if (sum(Nprime_M[,i,])==0 | sum(Nprime_F[,i,])==0)
+                if (sum(Nprime_M[,i,])==0 | sum(Nprime_F[,i,])==0) { # To save computing time
                     L_M[,i] = 0
                     L_F[,i] = 0
                     next
@@ -469,7 +464,7 @@ sim.metapopgen.dioecious.multilocus <- function(input.type,demographic.data,N1_M
                 }
                 
             } else {
-                if (sum(Nprime_M[,i,],Nprime_F[,i,])==0) { # To save computing time. In the older version it was: if (sum(Nprime_M[,i,])==0 | sum(Nprime_F[,i,])==0)
+                if (sum(Nprime_M[,i,])==0 | sum(Nprime_F[,i,])==0) { # To save computing time
                     L_M[,i,t] = 0
                     L_F[,i,t] = 0
                     next
