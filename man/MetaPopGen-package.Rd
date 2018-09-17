@@ -13,7 +13,7 @@ Functions and code to simulate metapopulation genetics. Includes genetic drift, 
 Package: \tab MetaPopGen\cr
 Type: \tab Package\cr
 Version: \tab 0.0.8\cr
-Date: \tab 2017-12-01\cr
+Date: \tab 2018-09-11\cr
 License: \tab GPL-2\cr
 }
 This package simulates metapopulation genetics accounting for genetic drift, migration, selection and mutation. 

@@ -2,7 +2,7 @@
 \alias{pop.loci}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-    Funcion to separate the population in genotype as if there where only one loci concidered 
+    Genotype frequencies per locus
 }
 \description{
 }
@@ -12,28 +12,27 @@
 %- maybe also 'usage' for other objects documented here.
 \arguments{
     \item{Proba}{
-    Matrix with the names of all the genotypes. This array is calculated with the function {create.probability.matrix}
+    Matrix giving the probability that a given genotype (column) produces a given gamete type (row). It is calculated with the function \code{\link[MetaPopGen:create.probability.matrix]{create.probability.matrix}}. 
     }
     \item{List_gene}{
-        List with the number of alleles for each loci
+        Vector of numbers of alleles per locus.
     }
     \item{loci}{
-        number giving the place in List_gene of the loci to concider
+        Index of the locus for which the genotype frequencies are sought.
     }
     \item{N}{
-        Array of 2 dimension giving the size of the population for each genotype for each deme, first dimension is the genotypes and second the deme.  
+        Array of 2 dimension giving the number of individuals of each genotype in each deme: the first dimension is the genotype and the second dimension is the deme.  
     }
 }
 \details{
     %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-    A square matrix with the size of the popultion for each genotype of the concidered loci in each deme.
+    A square matrix giving the number of individuals of each genotype (row) in each deme (column).
 }
 \references{
 }
-\author{
-}
+\author{Christelle Noirot}
 \note{
 }
 \seealso{

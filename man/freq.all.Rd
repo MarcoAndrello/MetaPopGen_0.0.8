@@ -2,9 +2,10 @@
 \alias{freq.all}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Calculates allele frequencies from a vector of genotype absolute frequencies
+Calculating allele frequencies 
 }
 \description{
+This function calculates allele frequencies from a vector of numbers of individuals of each genotype at one locus.
 }
 \usage{
 freq.all(N)
@@ -19,12 +20,11 @@ Vector (1-D array) giving the number of individuals of each genotype, ordered in
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-A vector of genotype frequencies. 
+A vector of allele frequencies. 
 }
 \references{
 }
-\author{
-}
+\author{Marco Andrello}
 \note{
 }
 \seealso{

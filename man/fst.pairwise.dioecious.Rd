@@ -13,10 +13,10 @@ fst.pairwise.dioecious(folder.name,i,j,xi,xj,ti,tj,si,sj)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{N}{
-A 4-D array (ex: \code{N[k,i,x,t]}) of length c(m,n,z,T_max) giving the number of individuals of genotype \code{k}, age \code{x} in deme \code{i} at time \code{t}. Typically, the output of the function \code{\link[MetaPopGen:sim.metapopgen]{sim.metapopgen.monoecious}}
+A 4-D array (ex: \code{N[k,i,x,t]}) of length c(m,n,z,T_max) giving the number of individuals of genotype \code{k}, age \code{x} in deme \code{i} at time \code{t}. Typically, the output of the function \code{\link[MetaPopGen:sim.metapopgen.dioecious]{sim.metapopgen.dioecious}}
 }
   \item{folder.name}{
-Character string giving the name of the folder where the results of \code{\link[MetaPopGen:sim.metapopgen]{sim.metapopgen.monoecious}} are saved, when this function is used with the argument  \code{save.res} set to TRUE.
+Character string giving the name of the folder where the results of \code{\link[MetaPopGen:sim.metapopgen.dioecious]{sim.metapopgen.dioecious}} are saved, when this function is used with the argument  \code{save.res} set to TRUE.
 }
   \item{i, xi, ti}{
 Identifiers of the first group of individuals: it specifies the individuals of deme \code{i}, age \code{xi} at time \code{ti}
